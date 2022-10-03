@@ -7,10 +7,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class BaseballComputer {
 	
-	private List<Integer> randNumbers;
+	private List<Integer> randNewNumbers;
+	private boolean end;
 
 	public BaseballComputer() {
-		this.randNumbers = makeRandomNumbers();
+		this.randNewNumbers = makeRandomNumbers();
+		this.end = false;
 	}
 	
 	private List<Integer> makeRandomNumbers() {
@@ -28,6 +30,11 @@ public class BaseballComputer {
 		}
 		return num;
 	}
+	
+	public boolean isEnd() {
+		return end;
+	}
+	
 	
 	
 }
