@@ -2,8 +2,8 @@ package baseball.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntPredicate;
 
+import baseball.constants.NumMessage;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class BaseballComputer {
@@ -36,28 +36,27 @@ public class BaseballComputer {
 	
 	private List<Integer> makeRandomNumbers() {
 		List<Integer> randNewNumbers = new ArrayList<>();
-		while (randNewNumbers.size() < 3) {
+		while (randNewNumbers.size() < NumMessage.NUM_LENGTH) {
 			randNewNumbers.add(makeRandomNumber(randNewNumbers));
 		}
 		return randNewNumbers;
 	}
 	
 	private int makeRandomNumber(List<Integer> randNewNumbers) {
-		int num = Randoms.pickNumberInRange(1,9);
+		int num = Randoms.pickNumberInRange(NumMessage.RANDOM_MIN_NUM,NumMessage.RANDOM_MAX_NUM);
 		while (randNewNumbers.contains(num)) {
-			num = Randoms.pickNumberInRange(1,9);
+			num = Randoms.pickNumberInRange(NumMessage.RANDOM_MIN_NUM,NumMessage.RANDOM_MAX_NUM);
 		}
 		return num;
 	}
 	
 	public void checkInput(List<Integer> inputNumbers) {
-		strikeCount = 0;
-		ballCount = 0;
+		strikeCount = ballCount = 0;
 		
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < NumMessage.NUM_LENGTH; i++) {
 			updateState(inputNumbers.get(i), i);
 		}
-		if(strikeCount == 3){
+		if(strikeCount == NumMessage.NUM_LENGTH){
 			end = true;
 		}
 	}

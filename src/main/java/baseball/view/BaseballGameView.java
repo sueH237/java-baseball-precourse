@@ -2,6 +2,7 @@ package baseball.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import baseball.domain.BaseballComputer;
+import baseball.constants.NumMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public class BaseballGameView {
 	
     public static List<Integer> readInputNumbers() throws IllegalArgumentException {
-        System.out.print("숫자를 입력해주세요 : ");
+        System.out.print(NumMessage.GAME_START);
         String input = Console.readLine();
         if (!validateInput(input)) {
             throw new IllegalArgumentException();
@@ -35,24 +36,23 @@ public class BaseballGameView {
         return true;
     }
     
-    private static boolean isValidLength(String str) {
+    private static boolean isValidLength(String str) throws IllegalArgumentException{
         if(str.length() != 3){
-            return false;
+        	throw new IllegalArgumentException(NumMessage.MESSAGE_VALIDATION_INPUT_LENGTH);
         }
-
         return true;
     }
 
-    private static boolean isValidNumber(String str) {
+    private static boolean isValidNumber(String str) throws IllegalArgumentException{
         char c1 = str.charAt(0);
         char c2 = str.charAt(1);
         char c3 = str.charAt(2);
 
         if(c1 < '1' || c1 > '9' || c2 < '1' || c2 > '9' || c3 < '1' || c3 > '9'){
-            return false;
+        	throw new IllegalArgumentException(NumMessage.MESSAGE_VALIDATION_INPUT_RANGE);
         }
         if(c1 == c2 || c2 == c3 || c1 == c3){
-            return false;
+        	throw new IllegalArgumentException(NumMessage.MESSAGE_VALIDATION_INPUT_DUPLICATE);
         }
 
         return true;
@@ -60,28 +60,28 @@ public class BaseballGameView {
     
     public static void getResult(BaseballComputer baseballComputer) {
     	if(baseballComputer.getBallCount() > 0){
-    		System.out.print(baseballComputer.getBallCount()+"볼 ");
+    		System.out.print(baseballComputer.getBallCount()+NumMessage.BALL+" ");
     	}
     	if(baseballComputer.getStrikeCount() > 0){
-    		System.out.print(baseballComputer.getStrikeCount()+"스트라이크");
+    		System.out.print(baseballComputer.getStrikeCount()+NumMessage.STRIKE);
     	}
     	if(baseballComputer.getBallCount() == 0 && baseballComputer.getStrikeCount() == 0){
-    		System.out.print("낫싱");
+    		System.out.print(NumMessage.NOTHING);
     	}
     	System.out.print("\n");
     }
     
     public static boolean checkGameStatus() {
-    	System.out.println("게임을 새로 시작하려면 1,종료하려면 2를 입력하세요.");
+    	System.out.println(NumMessage.GAME_RESTART);
     	String answer = Console.readLine();
-    	if(answer.equals("1"))
+    	if(answer.equals(NumMessage.INPUT_GAME_RESTART))
     		return true;
-    	if(answer.equals("2"))
+    	if(answer.equals(NumMessage.INPUT_GAME_END))
     		return false;
-    	throw new IllegalArgumentException();
+    	throw new IllegalArgumentException(NumMessage.MESSAGE_VALIDATION_INPUT_END);
     }
     
     public static void showGameEnd() {
-    	System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    	System.out.println(NumMessage.GAME_END);
     }
 }
