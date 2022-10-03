@@ -12,9 +12,8 @@ public class BaseballGameView {
         System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
         if (!validateInput(input)) {
-            throw new IllegalArgumentException("잘못된 입력값입니다");
+            throw new IllegalArgumentException();
         }
-
         return convertStringToIntegerList(input);
     }
 
@@ -53,18 +52,19 @@ public class BaseballGameView {
     
     public static void getResult(BaseballComputer baseballComputer) {
     	if(baseballComputer.getBallCount() > 0){
-    		System.out.println(baseballComputer.getBallCount()+"볼 ");
+    		System.out.print(baseballComputer.getBallCount()+"볼 ");
     	}
     	if(baseballComputer.getStrikeCount() > 0){
-    		System.out.println(baseballComputer.getStrikeCount()+"스트라이크");
+    		System.out.print(baseballComputer.getStrikeCount()+"스트라이크");
     	}
     	if(baseballComputer.getBallCount() == 0 && baseballComputer.getStrikeCount() == 0){
-    		System.out.println("낫싱");
+    		System.out.print("낫싱");
     	}
-    	System.out.println("\n");
+    	System.out.print("\n");
     }
     
     public static boolean checkGameStatus() {
+    	System.out.println("게임을 새로 시작하려면 1,종료하려면 2를 입력하세요.");
     	String answer = Console.readLine();
     	if(answer.equals("1"))
     		return true;
@@ -74,6 +74,6 @@ public class BaseballGameView {
     }
     
     public static void showGameEnd() {
-    	System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n 게임을 새로 시작하려면 1,종료하려면 2를 입력하세요.");
+    	System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
 }

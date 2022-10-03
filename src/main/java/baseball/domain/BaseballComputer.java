@@ -2,6 +2,7 @@ package baseball.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -17,20 +18,8 @@ public class BaseballComputer {
 		this.end = false;
 	}
 	
-	private List<Integer> makeRandomNumbers() {
-		List<Integer> randomNumbers = new ArrayList<>();
-		while (randomNumbers.size() < 3) {
-			randomNumbers.add(makeRandomNumber(randomNumbers));
-		}
-		return randomNumbers;
-	}
-	
-	private int makeRandomNumber(List<Integer> randomNumbers) {
-		int num = Randoms.pickNumberInRange(1,9);
-		while (randomNumbers.contains(num)) {
-			num = Randoms.pickNumberInRange(1,9);
-		}
-		return num;
+	public List<Integer> getRandomNumbers() {
+		return randNewNumbers;
 	}
 	
 	public boolean isEnd() {
@@ -45,8 +34,25 @@ public class BaseballComputer {
 		return ballCount;
 	}
 	
+	private List<Integer> makeRandomNumbers() {
+		List<Integer> randNewNumbers = new ArrayList<>();
+		while (randNewNumbers.size() < 3) {
+			randNewNumbers.add(makeRandomNumber(randNewNumbers));
+		}
+		return randNewNumbers;
+	}
+	
+	private int makeRandomNumber(List<Integer> randNewNumbers) {
+		int num = Randoms.pickNumberInRange(1,9);
+		while (randNewNumbers.contains(num)) {
+			num = Randoms.pickNumberInRange(1,9);
+		}
+		return num;
+	}
+	
 	public void checkInput(List<Integer> inputNumbers) {
-		strikeCount = ballCount = 0;
+		strikeCount = 0;
+		ballCount = 0;
 		
 		for(int i = 0; i < 3; i++) {
 			updateState(inputNumbers.get(i), i);
@@ -56,7 +62,7 @@ public class BaseballComputer {
 		}
 	}
 	
-	public void updateState(int num, int idx) {
+	public void updateState(Integer num, int idx) {
 		if(randNewNumbers.get(idx) == num) {
 			strikeCount++;
 			return;
@@ -66,6 +72,5 @@ public class BaseballComputer {
 			return;
 		}
 	}
-	
-	
+
 }
