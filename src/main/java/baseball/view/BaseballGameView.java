@@ -1,6 +1,7 @@
 package baseball.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import baseball.domain.BaseballComputer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,18 @@ public class BaseballGameView {
         }
 
         return true;
+    }
+    
+    public static void getResult(BaseballComputer baseballComputer) {
+    	if(baseballComputer.getBallCount() > 0){
+    		System.out.println(baseballComputer.getBallCount()+"볼 ");
+    	}
+    	if(baseballComputer.getStrikeCount() > 0){
+    		System.out.println(baseballComputer.getStrikeCount()+"스트라이크");
+    	}
+    	if(baseballComputer.getBallCount() == 0 && baseballComputer.getStrikeCount() == 0){
+    		System.out.println("낫싱");
+    	}
+    	System.out.println("\n");
     }
 }

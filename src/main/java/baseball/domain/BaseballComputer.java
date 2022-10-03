@@ -9,6 +9,8 @@ public class BaseballComputer {
 	
 	private List<Integer> randNewNumbers;
 	private boolean end;
+	private int strikeCount;
+	private int ballCount;
 
 	public BaseballComputer() {
 		this.randNewNumbers = makeRandomNumbers();
@@ -35,6 +37,35 @@ public class BaseballComputer {
 		return end;
 	}
 	
+	public int getStrikeCount() {
+		return strikeCount;
+	}
+	
+	public int getBallCount() {
+		return ballCount;
+	}
+	
+	public void checkInput(List<Integer> inputNumbers) {
+		strikeCount = ballCount = 0;
+		
+		for(int i = 0; i < 3; i++) {
+			updateState(inputNumbers.get(i), i);
+		}
+		if(strikeCount == 3){
+			end = true;
+		}
+	}
+	
+	public void updateState(int num, int idx) {
+		if(randNewNumbers.get(idx) == num) {
+			strikeCount++;
+			return;
+		}
+		if(randNewNumbers.contains(num)) {
+			ballCount++;
+			return;
+		}
+	}
 	
 	
 }

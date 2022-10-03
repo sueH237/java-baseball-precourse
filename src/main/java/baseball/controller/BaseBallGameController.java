@@ -15,6 +15,8 @@ public class BaseBallGameController {
 	private static void play(BaseballComputer baseballComputer) {
 		while(!baseballComputer.isEnd()) {
 			List<Integer> inputNumbers = BaseballGameView.readInputNumbers();
+			baseballComputer.checkInput(inputNumbers);
+			BaseballGameView.getResult(baseballComputer);
 		}
 	}
 }
