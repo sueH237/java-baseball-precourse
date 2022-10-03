@@ -26,12 +26,20 @@ public class BaseballGameView {
     }
 
     private static boolean validateInput(String str) {
-        if (str.length() != 3) {
-            return false;
+        if(!isValidLength(str)){
+        	return false;
         }
         if(!isValidNumber(str)){
             return false;
         }
+        return true;
+    }
+    
+    private static boolean isValidLength(String str) {
+        if(str.length() != 3){
+            return false;
+        }
+
         return true;
     }
 
