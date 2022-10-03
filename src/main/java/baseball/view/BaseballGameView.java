@@ -63,4 +63,17 @@ public class BaseballGameView {
     	}
     	System.out.println("\n");
     }
+    
+    public static boolean checkGameStatus() {
+    	String answer = Console.readLine();
+    	if(answer.equals("1"))
+    		return true;
+    	if(answer.equals("2"))
+    		return false;
+    	throw new IllegalArgumentException();
+    }
+    
+    public static void showGameEnd() {
+    	System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n 게임을 새로 시작하려면 1,종료하려면 2를 입력하세요.");
+    }
 }

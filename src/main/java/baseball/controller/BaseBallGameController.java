@@ -8,8 +8,12 @@ import baseball.view.BaseballGameView;
 public class BaseBallGameController {
 	
 	public static void start() {
-		BaseballComputer baseballComputer = new BaseballComputer();
-		play(baseballComputer);
+		boolean playFlag = true;
+		while(playFlag) {
+			BaseballComputer baseballComputer = new BaseballComputer();
+			play(baseballComputer);
+			playFlag = BaseballGameView.checkGameStatus();
+		}
 	}
 	
 	private static void play(BaseballComputer baseballComputer) {
@@ -18,5 +22,6 @@ public class BaseBallGameController {
 			baseballComputer.checkInput(inputNumbers);
 			BaseballGameView.getResult(baseballComputer);
 		}
+		BaseballGameView.showGameEnd();
 	}
 }
